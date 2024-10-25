@@ -17,7 +17,7 @@ const getCountryInfoSchema = z.object({
 type GetCountryInfoResponse = z.infer<typeof getCountryInfoSchema>
 export async function getCountryInfo({ countryCode }: { countryCode: string }) {
   const result = await api
-    .get<GetCountryInfoResponse>(`countries/${countryCode}`)
+    .get<GetCountryInfoResponse>(`api/v1/countries/${countryCode}`)
     .json<GetCountryInfoResponse>()
   return result
 }

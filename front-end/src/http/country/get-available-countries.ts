@@ -7,7 +7,7 @@ const getAvailableCountriesSchema = z.array(
 type GetAvailableCountriesResponse = z.infer<typeof getAvailableCountriesSchema>
 export async function getAvailableCountries() {
   const result = await api
-    .get<GetAvailableCountriesResponse>('countries')
+    .get<GetAvailableCountriesResponse>('api/v1/countries')
     .json<GetAvailableCountriesResponse>()
   return result
 }
