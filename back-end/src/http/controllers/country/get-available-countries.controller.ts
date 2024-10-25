@@ -19,6 +19,10 @@ export class GetAllAvailableCountriesController {
         await countriesResponse.json(),
       )
       return response.status(200).json(countries)
-    } catch (error) {}
+    } catch (error) {
+      if (error instanceof Error) {
+        return response.status(500).json({ error: error.message })
+      }
+    }
   }
 }
