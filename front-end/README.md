@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Front-End Solution 
 
-## Getting Started
+## Description
 
-First, run the development server:
+The application is a React (Next.js) application that consumes the API endpoints created in the Back-End solution.
+
+----
+
+## Tasks 
+   
+- [x] **Country List Page**:
+    - Display a list of countries fetched from the endpoint.
+    - Each country name should be clickable and navigate the user to the Country Info Page.
+
+- [x] **Country Info Page**:
+    - Display detailed information about the selected country, including:
+        - **Country Name**: Displayed prominently at the top.
+        - **Country Flag**: Displayed alongside the country name using the URL fetched from the backend.
+    - **Border Countries Widget**:
+        - Show a list of countries that border the selected country.
+        - Each border country name should be clickable and navigate the user to the corresponding Country Info Page.
+    - **Population Chart**:
+        - Implement a chart that shows the country’s population over time.
+        - The X-axis should represent years, and the Y-axis should represent the population.
+
+
+
+
+
+
+## How to run
+
+- Make sure that you have node.js installed in your machine (version 16+)
+
+### Install the dependencies
 
 ```bash
-npm run dev
+
+npm install
+
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+yarn install
+
+# or 
+
+pnpm install # recomended
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Start the server in development mode
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Get sure that the port `3000` is free.
 
-## Learn More
+If not, Next.js will automatically assign a free port.
 
-To learn more about Next.js, take a look at the following resources:
+If the backend is running in a different port, change the port number in the `env.local` file.
+```dotenv
+BACKEND_API_URL=http://localhost:3333 # Default value
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+npm run dev
 
-## Deploy on Vercel
+# or
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+yarn dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# or
+
+pnpm dev # recomended
+
+```
+
+-----
+
+### Start the server in production mode
+
+```bash
+
+npm run build
+
+npm run start
+
+# or
+
+yarn build
+
+yarn start
+
+# or
+
+pnpm build # recomended
+
+pnpm start # recomended
+
+```
+
+### Access the application
+
+[Aplication](http://localhost:3000)
+
+
