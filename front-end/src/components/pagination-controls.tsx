@@ -1,4 +1,5 @@
 'use client'
+
 import { CaretLeft, CaretRight } from '@phosphor-icons/react/dist/ssr'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { FC } from 'react'
@@ -11,6 +12,7 @@ interface PaginationControlsProps {
   total: number
   actualPage: string
 }
+
 const PaginationControls: FC<PaginationControlsProps> = ({
   hasNextPage,
   hasPrevPage,
@@ -19,14 +21,17 @@ const PaginationControls: FC<PaginationControlsProps> = ({
 }) => {
   const router = useRouter()
   const searchParams = useSearchParams()
+
   const page = searchParams.get('page') ?? '1'
   const perPage = searchParams.get('per_page') ?? '12'
+
   return (
-    <div className="flex flex-col items-center gap-2 w-full">
+    <div className="flex flex-col py-2 items-center gap-2 w-full">
       <p>You are on page</p>
       <div className="flex items-center gap-3">
         <Button
           size="icon"
+          className="border"
           disabled={!hasPrevPage}
           onClick={() => {
             router.push(
@@ -36,12 +41,15 @@ const PaginationControls: FC<PaginationControlsProps> = ({
         >
           <CaretLeft className="h-full w-full" />
         </Button>
+
         <div>
           {page} / {Math.ceil(total / Number(perPage))}
         </div>
+
         <Button
           size="icon"
           disabled={!hasNextPage}
+          className="border"
           onClick={() => {
             router.push(
               `/${actualPage}/?page=${Number(page) + 1}&per_page=${perPage}#products`,
@@ -54,4 +62,5 @@ const PaginationControls: FC<PaginationControlsProps> = ({
     </div>
   )
 }
+
 export default PaginationControls
