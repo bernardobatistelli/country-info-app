@@ -32,11 +32,13 @@ export default async function Home({
       <div className="w-full mx-auto max-w-7xl">
         <h1 className="text-primary-foreground text-3xl pb-10">Countries</h1>
       </div>
-      <div className="w-full flex gap-2 flex-col max-w-7xl mx-auto border rounded ">
+      <div className="w-full flex gap-2 flex-col max-w-7xl mx-auto border border-zinc-500 rounded ">
         <Table className="">
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[120px] border-r">Country Code</TableHead>
+              <TableHead className="w-[120px] border-r border-zinc-600">
+                Country Code
+              </TableHead>
               <TableHead className="">Country Name</TableHead>
               <TableHead className="text-right">More info</TableHead>
             </TableRow>
@@ -44,7 +46,7 @@ export default async function Home({
           <TableBody className="border-b">
             {entries.map((country) => (
               <TableRow key={country.countryCode + country.name}>
-                <TableCell className="font-medium border-r w-[100px]">
+                <TableCell className="font-medium border-r border-zinc-600 w-[100px]">
                   {country.countryCode}
                 </TableCell>
 
