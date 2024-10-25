@@ -48,7 +48,9 @@ export class GetCountryInfoController {
         .status(400)
         .json({ error: error?.flatten().fieldErrors.countryCode })
     }
+
     const { countryCode } = data
+    console.log(countryCode)
     try {
       const countryInfoResponse = await fetch(
         `https://date.nager.at/api/v3/CountryInfo/${countryCode}`,
@@ -59,12 +61,32 @@ export class GetCountryInfoController {
           },
         },
       )
+      console.log(countryInfoResponse)
       if (countryInfoResponse.status === 404) {
         return response.status(404).json({ error: 'Country Info not found' })
       }
       const { borders } = countryInfoSchema.parse(
         await countryInfoResponse.json(),
       )
+      const countryFlagResponse = await fetch(
+        `https://countriesnow.space/api/v0.1/countries/flag/images`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            iso2: countryCode,
+          }),
+          method: 'POST',
+        },
+      )
+      if (countryFlagResponse.status === 404) {
+        return response.status(404).json({ error: 'Country Flag not found' })
+      }
+      const { flag, iso3 } = countryFlagSchema.parse(
+        await countryFlagResponse.json(),
+      ).data
       const countryPopulationResponse = await fetch(
         `https://countriesnow.space/api/v0.1/countries/population`,
         {
@@ -73,7 +95,7 @@ export class GetCountryInfoController {
             Accept: 'application/json',
           },
           body: JSON.stringify({
-            iso3: countryCode,
+            iso3,
           }),
           method: 'POST',
         },
@@ -85,25 +107,6 @@ export class GetCountryInfoController {
       }
       const { populationCounts } = countryPopulationSchema.parse(
         await countryPopulationResponse.json(),
-      ).data
-      const countryFlagResponse = await fetch(
-        `https://countriesnow.space/api/v0.1/countries/flag/images`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({
-            iso2: countryCode.slice(0, 2),
-          }),
-          method: 'POST',
-        },
-      )
-      if (countryFlagResponse.status === 404) {
-        return response.status(404).json({ error: 'Country Flag not found' })
-      }
-      const { flag } = countryFlagSchema.parse(
-        await countryFlagResponse.json(),
       ).data
       const data = {
         borders,
